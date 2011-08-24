@@ -1,14 +1,56 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-
+<!--
+    $LastChangedRevision: 1938 $
+    $LastChangedDate: 2010-03-10 20:50:58 +1000 (Wed, 10 Mar 2010) $
+-->
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
-    "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
-    <!ENTITY % local.common.attrib
-               "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2001/XInclude'">
-]>
+    "http://www.oasis-open.org/docbook/xml/4.5CR1/docbookx.dtd" [
+    <!ENTITY articleinfo SYSTEM "articleinfo.xml">
+    <!ENTITY Introduction SYSTEM "Introduction.xml">
+    <!ENTITY Formalities SYSTEM "Formalities.xml">
+    <!ENTITY KeepItDRY SYSTEM "KeepItDRY.xml">
+    <!ENTITY BriefIntroToFP SYSTEM "BriefIntroToFP.xml">
+    <!ENTITY WhereDoesScalaFit SYSTEM "WhereDoesScalaFit.xml">
+    <!ENTITY BasicSyntax SYSTEM "BasicSyntax.xml">
+    <!ENTITY BasicFeatures SYSTEM "BasicFeatures.xml">
+    <!ENTITY AlgebraicDataTypes SYSTEM "AlgebraicDataTypes.xml">
+    <!ENTITY PartialApplication SYSTEM "PartialApplication.xml">
+    <!ENTITY ImplicitArguments SYSTEM "ImplicitArguments.xml">
+    <!ENTITY RealWorldSnippets SYSTEM "RealWorldSnippets.xml">
+    <!ENTITY Workingmouse SYSTEM "Workingmouse.xml">
+    <!ENTITY IfWeHaveTime SYSTEM "IfWeHaveTime.xml">
+    <!ENTITY Thanks SYSTEM "Thanks.xml">
+    <!ENTITY LargeApplications SYSTEM "LargeApplications.xml">
+    <!ENTITY ScalaExercisesForBeginners SYSTEM "ScalaExercisesForBeginners.xml">
+  ]>
 
-<article id="DocbookDocument" xmlns:xi="http://www.w3.org/2001/XInclude">
-  <xi:include href="articleinfo.xml"/>
-  <xi:include href="introduction.xml"/>
-  <xi:include href="PGPKEY.xml"/>
-  <xi:include href="CC-BY-SA.xml"/>
+<!--
+* Introduce time at IBM on the IBM JDK (java.security) and IBM WAS 6, Functional Java and Reductio
+(Automated Specification-based Verification and Testing)
+* Check audience
+  * Who attended the JAOO?
+  * Who has some familiarity with foundational concepts such as higher-order functions?
+* It is quite likely that we will not get to the end of these slides, but that is fine. You, the audience, will set the pace -
+  these slides are excessively long, just in case you are all unexpectedly super-human.
+* I am not here to bore you with slide after slide; you must engage your thinking faculties and ask me questions should they arise        
+* functionaljava.org and reductiotest.org are written in Scala
+-->
+<article>
+  &articleinfo;
+  &Introduction;
+  &Formalities;
+  &KeepItDRY;
+  &BriefIntroToFP;
+  &WhereDoesScalaFit;
+  &BasicSyntax;
+  &BasicFeatures;
+  &AlgebraicDataTypes;
+  &PartialApplication;
+  &ImplicitArguments;
+  &RealWorldSnippets;
+  &Workingmouse;
+  &IfWeHaveTime;
+  &Thanks;
+  &LargeApplications;
+  &ScalaExercisesForBeginners;
 </article>

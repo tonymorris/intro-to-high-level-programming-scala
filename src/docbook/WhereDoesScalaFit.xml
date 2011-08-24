@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    $LastChangedRevision: 1938 $
+    $LastChangedDate: 2010-03-10 20:50:58 +1000 (Wed, 10 Mar 2010) $
+-->
+
+<sect1 id="WhereDoesScalaFit">
+  <title>Where Does Scala Fit?</title>
+  <para>
+    <itemizedlist>
+      <listitem>
+        <para>
+          Impure by default, pure with great difficulty (Fortran, Modula-2, C, Java, C#).
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Pure by default, impure if you choose (<emphasis role="bold">Scala</emphasis>, SML, F#).
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Pure by mandate (Haskell, Clean).
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Scala is developed by the EPFL<footnote>
+            <para>
+              Ecole Polytechnique Fédérale de Lausanne              
+            </para>
+          </footnote> in Switzerland and is an open source project.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Scala appeals to OO and functional programming, while also catering to existing legacy Java. Scala is
+          <emphasis role="bold">not</emphasis> a functional programming language in the true sense, but is in the
+          popular sense (i.e. first-class functions).
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Scala compiles to <code>.class</code> files and transparently uses <emphasis role="bold">any</emphasis>
+          Java-compiled library or jar file.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Scala will not force us to divorce side-effects so be aware!
+        </para>
+      </listitem>
+    </itemizedlist>
+  </para>
+</sect1>

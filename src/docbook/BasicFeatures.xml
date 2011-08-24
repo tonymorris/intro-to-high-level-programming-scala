@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    $LastChangedRevision: 1938 $
+    $LastChangedDate: 2010-03-10 20:50:58 +1000 (Wed, 10 Mar 2010) $
+-->
+
+<sect1 id="BasicFeatures">
+  <title>Basic Features of Scala</title>
+  <sect2 id="BasicFeatures.TypeInference.NoTypeAnnotations">
+    <title>Type Inference</title>
+      <para>
+        <itemizedlist>
+          <listitem>
+            <para>
+              We don't have to explicitly specify type annotations.
+              <mediaobject>
+                <imageobject>
+                  <imagedata fileref="resources/images/Typing.jpg" format="JPG"/>
+                </imageobject>
+              </mediaobject>
+            </para>
+          </listitem>
+        </itemizedlist>
+      </para>
+  </sect2>
+  <sect2>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            But we can still have static verification!
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="resources/images/IAmAlwaysRight.jpg" format="JPG"/>
+              </imageobject>
+            </mediaobject>
+            <programlisting language="Scala">
+scala> val t = 7
+t: Int = 7
+
+scala> t.length
+&lt;console>:6: error: value length is not a member of Int
+     t.length
+            </programlisting>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            However, sometimes we must explicitly type annotate to help out the inferencer. e.g. method arguments,
+            recursive calls.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+  <sect2 id="BasicFeatures.FirstClassFunctions">
+    <title>First-class Functions</title>
+      <para>
+        <itemizedlist>
+          <listitem>
+            <para>
+              Since functions are first-class, we can pass them just as we do for any argument.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              A function that accepts a function as an argument is a <emphasis>higher-order function</emphasis>.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              The Scala library includes some higher-order functions
+              <programlisting language="Scala">
+  people.filter(_.age > 20)
+
+  people.sort((p1, p2) => p1.name &lt; p2.name)
+                
+  (1 to 15).filter(even)
+              </programlisting>
+            </para>
+          </listitem>
+        </itemizedlist>
+      </para>
+  </sect2>
+</sect1>

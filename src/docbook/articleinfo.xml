@@ -1,10 +1,49 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    $LastChangedRevision: 1938 $
+    $LastChangedDate: 2010-03-10 20:50:58 +1000 (Wed, 10 Mar 2010) $
+-->
 
-<!DOCTYPE articleinfo PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
-    "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
-
-<articleinfo id="DocbookDocumentInfo" xmlns:xi="http://www.w3.org/2001/XInclude">
-  <xi:include href="articleinfo/author/tony.xml"/>
-  <xi:include href="articleinfo/copyright.xml"/>
-  <title id="Title">Docbook Document</title>
+<articleinfo id="ArticleHeader">
+  <abstract id="Abstract">
+    <para>
+      This document is intended as a guide to a 60 &mdash; 75 minute presentation on introducing computer programming
+      concepts to industry programmers using the <ulink url="http://scala-lang.org/">Scala programming language</ulink>.
+      Although many of these concepts are general enough to apply to all forms of computer programming, this document
+      also introduces some basic Scala syntax and foundational programming theory.
+    </para>
+    <para>
+      Some of the points made in this document assume an audience familiar with the Java programming language.
+    </para>
+  </abstract>
+  <author id="Author">
+    <firstname>Tony</firstname>
+    <surname>Morris</surname>
+    <address>
+      <email>research@workingmouse.com</email>
+      <city>Brisbane</city>
+      <state>Queensland</state>
+      <country>Australia</country>
+    </address>
+  </author>
+  <copyright id="Copyright">
+    <year>2008</year>
+    <holder>
+      Workingmouse Pty. Ltd. All Rights Reserved
+    </holder>
+  </copyright>
+  <revhistory id="RevHistory">
+    <revision>
+      <revnumber>
+        $LastChangedRevision: 1938 $
+      </revnumber>
+      <date>
+        $LastChangedDate: 2010-03-10 20:50:58 +1000 (Wed, 10 Mar 2010) $
+      </date>
+      <revremark>
+        Initial authoring
+      </revremark>
+    </revision>
+  </revhistory>
+  <title id="Title">Introduction to High-level Programming with Scala</title>
 </articleinfo>

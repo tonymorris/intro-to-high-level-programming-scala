@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    $LastChangedRevision: 1938 $
+    $LastChangedDate: 2010-03-10 20:50:58 +1000 (Wed, 10 Mar 2010) $
+-->
+
+<sect1 id="AlgebraicDataTypes">
+  <title>Algebraic Data Types</title>
+  <sect2 id="AlgebraicDataTypes.TheExpressionProblem">
+    <title>The Expression Problem</title>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            We use the visitor pattern in traditional OO to get around the problem of wanting to add a method to an
+            interface and all its implementations.
+            <itemizedlist>
+              <listitem>
+                <para>
+                  What if we don't own the interface?
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                  What if we don't have track of all the implementations!?
+                </para>
+              </listitem>
+            </itemizedlist>
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+  <sect2>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            Suppose we wish to use a collection that always has only zero or one element and we wish to dispatch based
+            on this.
+            <programlisting language="Java">
+interface OneOrNone&lt;T&gt; {
+  &lt;A&gt; A visit(OneOrNoneVisitor&lt;A&gt; v);
+}
+
+abstract class One&lt;T&gt; implements OneOrNone&lt;T&gt; {
+  public &lt;A&gt; A visit(OneOrNoneVisitor&lt;A&gt; v) { return v.visit(this); }
+  abstract T one();
+}
+
+class None&lt;T&gt; implements OneOrNone&lt;T&gt; {
+  public &lt;A&gt; A visit(OneOrNoneVisitor&lt;A&gt; v) { return v.visit(this); }
+}
+
+interface OneOrNoneVisitor&lt;A&gt; {
+  &lt;T&gt; A visit(One&lt;T&gt; o);
+  &lt;T&gt; A visit(None&lt;T&gt; n);
+}
+            </programlisting>
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+  <sect2>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            So you write a function that uses the visitor.
+            <programlisting language="Java">
+class You {
+  static &lt;X&gt; String stringOne(OneOrNone&lt;X&gt; o) {
+    return o.visit(new OneOrNoneVisitor&lt;String&gt;() {
+      public &lt;T&gt; String visit(One&lt;T&gt; o) { return "got it! " + o.one(); }
+      public &lt;T&gt; String visit(None&lt;T&gt; n) { return "don't got one"; }
+    });
+  }
+}
+            </programlisting>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            We are effectively destructuring into one of two parts, where one of those parts contains a value, while the
+            other doesn't.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+  <sect2>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            Instead, we do away with the visitor code and create an <emphasis>Algebraic Data Type</emphasis>.
+            <programlisting language="Java">
+sealed trait OneOrNone[+A]
+final case object None extends OneOrNone[Nothing]
+final case class One[+A](a: A) extends OneOrNone[A]
+            </programlisting>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Then we <emphasis>pattern match</emphasis> when destructuring:
+            <programlisting language="Java">
+def stringOne[X](o: OneOrNone[X]) = o match {
+  case One(o) => "get it! " + o
+  case None => "don't got one"                
+}
+            </programlisting>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Much tidier!
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+  <sect2 id="AlgebraicDataTypes.DescribingStructure">
+    <title>Describing structure</title>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            Consider the set of natural numbers<footnote>
+              <para>
+                See Church Numeral Encoding &mdash; Alonzo Church
+              </para>
+            </footnote>.
+            <programlisting language="Scala">
+sealed trait Natural
+final case object Zero extends Natural
+final case class Succ(s: Natural) extends Natural
+            </programlisting>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            We can now write a function to add two natural numbers.
+            <programlisting language="Scala">
+def add(x: Natural, y: Natural): Natural = x match {
+  case Zero => y
+  case Succ(t) => add(t, Succ(y))
+}
+
+scala> val k = add(Succ(Succ(Zero)), Succ(Zero)) // add 2 1
+k: Natural = Succ(Succ(Succ(Zero)))
+            </programlisting>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            We destructure algebraic data types using <emphasis>pattern matching</emphasis> &mdash; the
+            <code>case</code> and <code>match</code> keywords.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            We could write many functions over this algebraic data type.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+  <sect2 id="AlgebraicDataTypes.List">
+    <title>List</title>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            Lists are extremely common in high-level programming.
+            <programlisting language="Scala">
+sealed trait List[+A]
+final case object Nil extends List[Nothing]
+final case class Cons[A](h: A, t: List[A]) extends List[A]
+            </programlisting>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Singly-linked list, however, unlike what you may be used to, lists are immutable! We
+            <emphasis>prepend</emphasis> to lists, not append<footnote>
+              <para>
+                We can, but it is a more expensive operation.
+              </para>
+            </footnote> and we do not do it destructively.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Immutability leads to sharing. You can pass your list all around the place and nobody is going to update it
+            &mdash; not just by promise, but not even the most malicious method could.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+  <sect2 id="AlgebraicDataTypes.Option">
+    <title>Option</title>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            The <code>Option</code> structure is a list that contains 0 or 1 element (
+            <emphasis>sound familiar?</emphasis>) &mdash; and is not recursive like <code>List</code>.
+            <programlisting language="Scala">
+sealed trait Option[+A]
+final case object None extends Option[Nothing]
+final case class Some[+A](a: A) extends Option[A]
+            </programlisting>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <code>Option</code> is a better <code>null</code> than <code>null</code>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Consider a <code>Map.get(K)</code> that returns an <code>Option[V]</code> &mdash; not just a <code>V</code>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            The <code>flatMap</code> method is one example of a method written over the <code>Option</code> algebraic
+              type.
+            <programlisting language="Java">
+X x = method1(args1);
+if(x == null) return null;
+else {
+  Y y = method2(x, args2);
+  if(y == null) return null;
+  else return method3(y, args3);
+            </programlisting>
+            Ick!
+            <programlisting language="Scala">
+method1(args1) flatMap (method2(_, args2)) flatMap (method3(_, args3))
+            </programlisting>
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+  <sect2 id="AlgebraicDataTypes.Either">
+    <title>Either</title>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            The <code>Either</code> algebraic type is exceptional in that it was authored by an incredibly handsome
+            person.
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="resources/images/DavidHasselhoff.jpg" format="JPG"/>
+              </imageobject>
+            </mediaobject>
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+  <sect2>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            The <code>Either</code> data type represents <emphasis>logical disjunction &mdash; this or
+            that.</emphasis><footnote>
+              <para>
+                See Curry-Howard Isomorphism or Proofs as Programs.
+              </para>
+            </footnote>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Have you ever wanted to return one type or another, depending on the input?
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Typically, you'd write a class to represent the disjunctive nature of this requirement &mdash; perhaps using
+            the visitor pattern again and dispatching polymorphically.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <code>Either</code> is a better recoverable exception model than Java exceptions.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+  <sect2 id="AlgebraicDataTypes.Others">
+    <title>Others</title>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            There are many others; pairs (<emphasis>logical conjunction</emphasis>), functions (<emphasis>logical
+            implication</emphasis>), lazy lists, trees.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            And of course, you can write your own.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+</sect1>

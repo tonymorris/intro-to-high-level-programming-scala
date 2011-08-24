@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    $LastChangedRevision: 1938 $
+    $LastChangedDate: 2010-03-10 20:50:58 +1000 (Wed, 10 Mar 2010) $
+-->
+
+<sect1 id="Formalities">
+  <title>Formalities</title>
+  <sect2 id="Formalities.Questions">
+    <title>Questions</title>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            Questions. Please stop me and ask them.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            However, some questions give rise to more questions! These must be deferred due to time constraints.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            "What do you think about the paint job on Russell's Teapot?<footnote>
+              <para>
+                "If I were to suggest that between the Earth and Mars there is a china teapot revolving about the sun in
+                an elliptical orbit, nobody would be able to disprove my assertion provided I were careful to add that
+                the teapot is too small to be revealed even by our most powerful telescopes. But if I were to go on to
+                say that, since my assertion cannot be disproved, it is an intolerable presumption on the part of human
+                reason to doubt it, I should rightly be thought to be talking nonsense. If, however, the existence of
+                such a teapot were affirmed in ancient books, taught as the sacred truth every Sunday, and instilled
+                into the minds of children at school, hesitation to believe in its existence would become a mark of
+                eccentricity and entitle the doubter to the attentions of the psychiatrist in an enlightened age or of
+                the Inquisitor in an earlier time." &mdash; Bertrand Russell (1872 &mdash; 1970)
+              </para>
+            </footnote>
+
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            However, <emphasis>please see me after this session, or email me with your question</emphasis>.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+  <sect2 id="Formalities.Objectives">
+    <title>Objectives</title>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            What will you take from this?
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Depth versus excitement. Not even Gary Kasparov could teach you to play chess in such a short time-frame.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            But he could certainly plant some seeds!
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Beware of under-qualified internet commentators and snake oil vendors offering misleading advice.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            I am more optimistic than Dijkstra.<footnote>
+              <para>
+                It is practically impossible to teach good programming to students that have had a prior exposure to
+                BASIC: as potential programmers they are mentally mutilated beyond hope of regeneration.
+              </para>
+            </footnote>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            It is <emphasis role="bold">not</emphasis> an objective to convince you of the importance of the concepts at
+            hand or to present irrefutable and compelling cases &mdash; mostly due to time constraints.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Keep thinking. Keep asking questions.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+</sect1>

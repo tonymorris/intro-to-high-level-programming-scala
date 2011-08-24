@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    $LastChangedRevision: 1938 $
+    $LastChangedDate: 2010-03-10 20:50:58 +1000 (Wed, 10 Mar 2010) $
+-->
+
+<sect1 id="BasicSyntax">
+  <title>Basic Syntax of Scala</title>
+  <sect2 id="BasicSyntax.val,var,def,lazy_val">
+    <title>val,var,def,lazy val</title>
+      <para>
+        <itemizedlist>
+          <listitem>
+            <para>
+              <code>var</code> declares a mutable cell. Analogous to a non-<code>final</code> in Java. Avoid the use of
+              <code>var</code> unless in exceptional circumstances.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              <code>val</code> declares an immutable cell that is evaluated at its declaration point. Analogous to a
+              <code>final</code> in Java.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              <code>def</code> declares an immutable cell that is evaluated upon each use. An argument list may follow.
+              Analogous to a method in Java.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              <code>lazy val</code> declares an immutable cell that is unevaluated until first use.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Example <emphasis>(welcome to the Scala interpreter)</emphasis>
+              <programlisting language="Scala">
+scala> val a = 7
+a: Int = 7
+
+scala> def b = 8
+b: Int
+
+scala> def c(n: Int) = n + 42
+c: (Int)Int
+
+scala> var d = 9
+d: Int = 9
+
+scala> lazy val e = 10
+e: Int = 10
+              </programlisting>
+            </para>
+          </listitem>
+        </itemizedlist>
+      </para>
+  </sect2>
+  <sect2 id="BasicSyntax.if_else">
+    <title>if/else</title>
+      <para>
+        <itemizedlist>
+          <listitem>
+            <para>
+              Scala's <code>if/else</code> combines Java's <code>if/else</code> and only ternary operator
+              <code>?:</code>.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Example
+              <programlisting language="Scala">
+scala> val t = if(true) 7 else 8
+t: Int = 7
+
+scala> if(false) println("foo") else println("bar") // side-effect
+bar
+
+scala> println(if(true) "foo" else "bar")
+foo
+              </programlisting>
+            </para>
+          </listitem>
+        </itemizedlist>
+      </para>
+  </sect2>
+  <sect2 id="BasicSyntax.FirstClassFunctions">
+    <title>First-class Functions</title>
+      <para>
+        <itemizedlist>
+          <listitem>
+            <para>
+              Scala has <emphasis>first-class functions</emphasis>. Very similar to the
+              <ulink url="http://javac.info/">Java 7 BGGA</ulink> proposal.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Java doesn't but we emulate it with interfaces &mdash; often with extravagant identifier names:
+              <programlisting language="Java">
+interface Function&lt;A, B&gt; {
+  B call(A a);
+}
+
+interface DatabaseWalloper {
+  Walloped wallop(Connection a);
+}
+              </programlisting>
+            </para>
+          </listitem>
+        </itemizedlist>
+      </para>
+  </sect2>
+  <sect2>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            In Scala, instead of passing a <code>Function&lt;String, Integer&gt;</code>, we pass
+            <code>String => Integer</code> and instead of <code>function.call(a)</code> we write
+            <code>function(a)</code>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <programlisting language="Scala">
+scala> def reverseParse(s: String, f: String => Int) = f(s.reverse)
+reverseParse: (String,(String) => Int)Int
+
+scala> val c = reverseParse("5632", Integer.parseInt(_))
+c: Int = 2365
+            </programlisting>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Since functions are first-class we can do other clever things with them, like compose them.
+            <programlisting language="Scala">
+scala> def compose[A, B, C](f: B => C, g: A => B): A => C = (a: A) => f(g(a))
+compose: [A,B,C]((B) => C,(A) => B)(A) => C
+            </programlisting>
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+  <sect2 id="BasicSyntax.OtherKeywords">
+    <title>Other Keywords</title>
+      <para>
+        <itemizedlist>
+          <listitem>
+            <para>
+              <code>trait</code> is like a Java <code>interface</code> but allows
+              <emphasis>mixin composition</emphasis>.
+              <programlisting language="Scala">
+scala> trait Foo { def bar(n: Int): String }
+defined trait Foo
+
+scala> trait Bar
+defined trait Bar
+
+scala> trait Baz extends Foo with Bar { val baz: java.util.LinkedList[Int] }
+defined trait Baz
+              </programlisting>
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              <code>class</code> is similar to a Java <code>class</code>, however <code>case class</code> has no Java
+              equivalent.
+              <programlisting language="Scala">
+scala> case class Person(name: String, age: Int)
+defined class Person
+
+scala> val p = Person("Bob", 42)
+p: Person = Person(Bob,42)
+
+scala> val z = p.name
+z: String = Bob
+              </programlisting>
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              A <code>sealed</code> <code>class</code> or <code>trait</code> restricts possible subtypes to the 
+              declaring source file. Java has an obtuse equivalent by exploiting the fact that only nested classes may
+              subclass a class with an inaccessible constructor.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              <code>sealed</code> types and <code>case class</code> are used to denote
+              <emphasis>Algebraic Data Types</emphasis>.
+            </para>
+          </listitem>
+        </itemizedlist>
+      </para>
+  </sect2>
+  <sect2 id="BasicSyntax.TypeParameterVariance">
+    <title>Type Parameter Variance</title>
+      <para>
+        <itemizedlist>
+          <listitem>
+            <para>
+              In Java, a <code>List&lt;String&gt;</code> is not a <code>List&lt;CharSequence&gt;</code> even though a
+              <code>String</code> is a <code>CharSequence</code>.
+              <programlisting language="Java">
+void m1(java.util.List&lt;CharSequence&gt; s) {}
+void m2(java.util.List&lt;String&gt; s) { m1(s); } // bzzt!
+              </programlisting>
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Java's type parameters are always <emphasis>invariant</emphasis>, but would be nice if they were
+              <emphasis>covariant</emphasis><footnote>
+                <para>
+                  This is not entirely true in that a weak form of covariance can be represented with
+                  <code>T extends U</code> and contra-variance with <code>T super U</code>.
+                </para>
+              </footnote>.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Covariance doesn't mix well with side-effects<footnote>
+                <para>
+                  For example, side-effecting on a covariant Java array results in an <code>ArrayStoreException</code>.
+                </para>
+              </footnote>
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              But we aren't married to them anymore! We can have covariance, at a small cost &mdash; since we are still
+              dating them. We use <code>+</code> to denote covariance<footnote>
+                <para>
+                  And <code>-</code> to denote contravariance; another matter.
+                </para>
+              </footnote>
+              <programlisting language="Scala">
+scala> trait List[+A] { val head: A; val tail: List[A] }
+
+scala> val x = new List[String] { val head = "abc"; val tail = null }
+
+scala> val y: List[CharSequence] = x
+              </programlisting>
+            </para>
+          </listitem>
+        </itemizedlist>
+      </para>
+  </sect2>
+  <sect2 id="BasicSyntax.Imports">
+    <title>Imports</title>
+      <para>
+        <itemizedlist>
+          <listitem>
+            <para>
+              The <code>import</code> keyword is used for importing packages.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Packages are hierarchical; <code>foo.bar</code> has access to everything in <code>foo</code>. This also
+              applies if adding to existing Java code. e.g. your Scala source file in <code>java.util.concurrent</code>
+              has access to Java collections (<code>java.util</code>) without importing.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Imports may contain multiple entries <code>import java.util.{LinkedList, HashSet}</code>.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Imports may wildcard <code>import java.util._</code> or <code>import java.util.Collectons._</code>.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Imports may appear anywhere in a source file and are scoped accordingly.
+            </para>
+          </listitem>
+        </itemizedlist>
+      </para>
+  </sect2>
+</sect1>

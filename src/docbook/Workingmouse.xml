@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    $LastChangedRevision: 1938 $
+    $LastChangedDate: 2010-03-10 20:50:58 +1000 (Wed, 10 Mar 2010) $
+-->
+
+<sect1 id="WorkingmouseTraining">
+  <title>Want to Learn More?</title>
+  <para>
+    <mediaobject>
+      <imageobject>
+        <imagedata fileref="resources/images/workingmouse.png" format="PNG"/>
+      </imageobject>
+    </mediaobject>
+    <itemizedlist>
+      <listitem>
+        <para>
+          I will happily answer your questions when I can get a chance &mdash; by email or otherwise.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          I would love to give these topics justice, which is simply not achievable in a one hour talk.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Workingmouse offers 2 &mdash; 3 day hands-on workshop sessions that cover these topics and more in thorough
+          detail. In particular, we go deeper into answering <emphasis>why this foreign mumbo-jumbo is 
+          important</emphasis>.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          The training sessions cover language basics all the way to advanced high-level programming concepts, primarily
+          using Scala or Haskell.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          To talk to myself or Brad Clow if you are interested in becoming a better and highly proficient software
+          developer <ulink url="mailto:training@workingmouse.com">training@workingmouse.com</ulink>.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Most people have had an <emphasis>"aha! moment"</emphasis> on day 2 or 3 and have started rewriting all their
+          legacy Java using Scala.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Who wants to know what a monad is and why it matters?
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          These slides are available on the Workingmouse Wiki
+          <ulink url="http://wiki.workingmouse.com/">http://wiki.workingmouse.com/</ulink>.
+        </para>
+      </listitem>
+    </itemizedlist>
+  </para>
+</sect1>

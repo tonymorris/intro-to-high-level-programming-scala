@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    $LastChangedRevision: 1938 $
+    $LastChangedDate: 2010-03-10 20:50:58 +1000 (Wed, 10 Mar 2010) $
+-->
+
+<sect1 id="PartialApplication">
+  <title>Partial Application</title>
+  <sect2 id="PartialApplication.ReplaceParameterWithMethod">
+    <title>Replace Parameter With Method</title>
+    <para>
+      Refactoring Catalog<ulink url="http://www.refactoring.com/catalog/replaceParameterWithMethod.html">§</ulink>:
+      Replace Parameter with Method
+    </para>
+    <para>
+      An object invokes a method, then passes the result as a parameter for a method. The receiver can also invoke this
+      method. Remove the parameter and let the receiver invoke the method.
+    </para>
+    <para>
+      Before:
+      <programlisting language="Java">
+int basePrice = _quantity * _itemPrice;
+discountLevel = getDiscountLevel();
+double finalPrice = discountedPrice (basePrice, discountLevel);
+      </programlisting>
+    </para>
+    <para>
+      <programlisting language="Java">
+int basePrice = _quantity * _itemPrice;
+double finalPrice = discountedPrice (basePrice);
+      </programlisting>
+    </para>
+  </sect2>
+  <sect2 id="PartialApplication.JavaGetsNoCurry">
+    <title>Java Gets No Curry</title>
+    <itemizedlist>
+      <listitem>
+        <para>
+          In Java, all methods are in <emphasis>uncurried form</emphasis>.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          They take zero or more arguments and return a value e.g. <code>(A x B x C) -> D</code>.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          In curried form, <code>A -> B -> C -> D</code> where the <code>-></code> associates to the right
+          <code>A -> (B -> (C -> D))</code>.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          We can <emphasis>partially apply</emphasis> each argument, getting back a function (that we can apply another
+          argument to) or we get back a value.
+        </para>
+      </listitem>
+    </itemizedlist>
+  </sect2>
+  <sect2 id="PartialApplication.ConstructorsAsAnExample">
+    <title>Constructors as the Example</title>
+    <itemizedlist>
+      <listitem>
+        <para>
+          Since Java is always uncurried, we often use constructor arguments to work around it or a
+          <emphasis>factory</emphasis>.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Then, every use of the object has the constructor arguments applied.
+          <programlisting language="Java">
+Foo foo = new Foo("foo");
+foo.method("bar"); // method uses the value "foo" by accessing a field            
+          </programlisting>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Consider a trivial example <code>Encoder -> String -> byte[]</code>.
+          <programlisting language="Java">
+Encoder e = new Encoder("UTF-8");
+byte[] encoded = e.encode(contents); // has UTF-8 applied.
+          </programlisting>
+        </para>
+      </listitem>
+    </itemizedlist>
+  </sect2>
+  <sect2 id="PartialApplication.PartiallyApplyingScala">
+    <title>Partially Applying Scala</title>
+    <itemizedlist>
+      <listitem>
+        <para>
+          In Scala, we can partially apply arguments to return new functions.
+          <programlisting language="Scala">
+scala> def add(x: Int)(y: Int) = x + y
+add: (Int)(Int)Int
+
+scala> def foo = add(7) _
+foo: (Int) => Int
+
+scala> val h = foo(8)
+h: Int = 15            
+          </programlisting>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          We can get very funky indeed.
+          <programlisting language="Scala">
+scala> val i = List(1, 2, 3) map foo
+i: List[Int] = List(8, 9, 10)
+          </programlisting>
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Our encoder.
+          <programlisting language="Scala">
+scala> def encoder: String => String => Array[Byte] = null // todo
+encoder: (String) => (String) => Array[Byte]
+            
+scala> def utf8 = encoder("UTF-8")
+utf8: (String) => Array[Byte]
+
+scala> def encoded = utf8("contents")
+encoded: Array[Byte]
+          </programlisting>
+        </para>
+      </listitem>
+    </itemizedlist>
+  </sect2>
+</sect1>

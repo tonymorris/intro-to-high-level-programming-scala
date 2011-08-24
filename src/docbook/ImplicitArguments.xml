@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    $LastChangedRevision: 1938 $
+    $LastChangedDate: 2010-03-10 20:50:58 +1000 (Wed, 10 Mar 2010) $
+-->
+
+<sect1 id="ImplicitArguments">
+  <title>Implicit Arguments</title>
+  <para>
+    <itemizedlist>
+      <listitem>
+        <para>
+          Some function arguments can be declared <code>implicit</code>.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Then, at compile-time, the only value matching the type of that argument is used. If there is no matching
+          argument or there is more than one, then a compile-time error results.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Implicits appear like a potential problem at superficial glance, since what about side-effects?
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          But actually, we can encode an extremely powerful concept called type-classes<footnote>
+            <para>
+              See How to make ad-hoc polymorphism less ad hoc by Philip Wadler and Stephen Blott (and subsequent
+              papers).
+            </para>
+          </footnote> with <code>implicit</code> arguments.
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          We can also do what the dynamic typing guys are doing, but with the advantage of safety<footnote>
+            <para>
+              Also see C# 3.0 Extension Methods
+            </para>
+          </footnote>
+          <programlisting language="Scala">
+scala> implicit def i(s: String) = new { def parseInt = Integer.parseInt(s) }
+i: (String)java.lang.Object{def parseInt: Int}
+
+scala> val v = "456".parseInt
+v: Int = 456
+          </programlisting>
+        </para>
+      </listitem>
+    </itemizedlist>
+  </para>
+</sect1>

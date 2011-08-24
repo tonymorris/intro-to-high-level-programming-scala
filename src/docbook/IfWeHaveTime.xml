@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    $LastChangedRevision: 1938 $
+    $LastChangedDate: 2010-03-10 20:50:58 +1000 (Wed, 10 Mar 2010) $
+-->
+
+<sect1 id="IfWeHaveTime">
+  <title>If we have time but we probably won't</title>
+  <sect2 id="IfWeHaveTime.Questions">
+    <title>Are we still here?</title>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            The remaining concepts are quite deep and advanced and each of them can initiate lengthy discussion.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            What have we seen so far?
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+  <sect2 id="IfWeHaveTime.WeWont">
+    <title>I feel very little right now</title>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            What you have seen today may appear intimidating or overwhelming in theoretical foundation.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Some of the more advanced concepts are those that are the most exciting and incredibly powerful, however,
+            they typically require some pre-requisite understanding.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Let's not burn our brains just yet anyway.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Take the following with light steps and don't feel intimidated if you do not follow.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+  <sect2 id="IfWeHaveTime.HigherKinds">
+    <title>Higher Kinds</title>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            In Java, we can abstract over type variables. After all, we don't write a <code>length</code> function for
+            <code>List&lt;String&gt;,  List&lt;Integer&gt;, List&lt;Person&gt;</code> and so on.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            With Scala, we can abstract over <emphasis>type constructors</emphasis>.
+            <programlisting language="Scala">
+trait Mappable[F[_]] {
+  def map[A, B](fa: F[A], f: A => B): F[B]
+}
+          </programlisting>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Some type constructors that are <code>Mappable</code>:
+            <itemizedlist>
+              <listitem>
+                <para>
+                  <code>List</code>
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                  <code>Option</code>
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                  <code>Either[X, _]</code>
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                  <code>Either[_, Y]</code>
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                  <code>Function[X, _]</code>
+                </para>
+              </listitem>
+            </itemizedlist>
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+  <sect2 id="IfWeHaveTime.LazyAnnotations">
+    <title>Lazy Annotations</title>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            Scala arguments may be annotated to defer their evaluation.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            This can be very dangerous in an environment with uncontrolled side-effects, but also gives excellent
+            compositional properties. Be careful!
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <programlisting language="Scala">
+scala> def and(x: Boolean, y: => Boolean) = x &amp;&amp; y
+and: (Boolean,=> Boolean)Boolean
+
+scala> val r = and(false, throw new Error("blow up!"))
+r: Boolean = false
+            </programlisting>
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+  <sect2 id="IfWeHaveTime.HighLevelAbstractions">
+    <title>High Level Abstractions</title>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            Since we have higher-kinds we can model some high-level abstractions, including those from the king of
+            abstraction &mdash; Category Theory.
+            <itemizedlist>
+              <listitem>
+                <para>
+                  <code>Functor</code>
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                  <code>Monad</code><footnote>
+                    <para>
+                      See Monads for Functional Programming by Philip Wadler
+                    </para>
+                  </footnote>
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                  <code>Applicative</code><footnote>
+                    <para>
+                      See Applicative Programming with Effects by Conor McBride and Ross Paterson
+                    </para>
+                  </footnote>
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                  <code>Traversable</code><footnote>
+                    <para>
+                      See The Essence of the Iterator Pattern by Jeremy Gibbons and Bruno C. d. S. Oliveira
+                    </para>
+                  </footnote>
+                </para>
+              </listitem>
+              <listitem>
+                <para>
+                  <code>Arrow</code><footnote>
+                    <para>
+                      See Programming with Arrows by John Hughes
+                    </para>
+                  </footnote>
+                </para>
+              </listitem>
+            </itemizedlist>
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+  <sect2 id="IfWeHaveTime.CodeSnippets">
+    <title>Some High-level Code Snippets (for fun)</title>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            Adding methods (<code>!></code> and <code>unless)</code> to <code>Boolean</code> to perform a side-effect
+            depending on the value.
+            <programlisting language="Scala">
+(7 > 6) !> println("seven is greater than six")
+(6 > 7) unless println("six is not less than seven")
+            </programlisting>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Addings methods to any reducible container.
+            <programlisting language="Scala">
+List(1, 3, 5) any even // false
+Array(1, 2, 3) all even // false
+List(2, 6, 8, 9, 6, 7, 3, 5, 8, 6, 9) selectSplit even // List(List(2, 6, 8), List(6), List(8, 6))
+"age=54&amp;name=Bob&amp;address=At Home".toList selectSplit (_ != '&amp;') > (_.mkString) // List(age=54, name=Bob, address=At Home)
+            </programlisting>
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+  <sect2>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            The <code>Functor</code>.
+            <programlisting language="Scala">
+List(1, 2, 3) > (_ + 1) // List(2, 3, 4)
+Some(1) > (_ + 1) // Some(2)
+None > (_ + 1) // None              
+            </programlisting>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            The <code>Monad</code>.
+            <programlisting language="Scala">
+Some(7) >>= (x => if(x % 2 == 0) None else Some(x + 1)) // Some(8)
+Some(8) >>= (x => if(x % 2 == 0) None else Some(x + 1)) // None
+Some("a").replicate[List](3) // Some(List(a, a, a))
+            </programlisting>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            The <code>MonadPlus</code>.
+            <programlisting language="Scala">
+List(1, 2, 3) &lt;+> List(4, 5, 6) // List(1, 2, 3, 4, 5, 6)
+Some(7) &lt;+> Some(8) // Some(7)
+Some(7) &lt;+> None // Some(7)              
+            </programlisting>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            The <code>Applicative</code> functor.
+            <programlisting language="Scala">
+Some(7) &lt;*> (None > add2) // None
+Some(7) &lt;*> (Some(8) > add2) // Some(15)
+List(1, 2, 3) &lt;*> (List("a", "b") > (s => n => n + s + n)) // List(1a1, 2a2, 3a3, 1b1, 2b2, 3b3)
+            </programlisting>
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            The <code>Traversable</code>.
+            <programlisting language="Scala">
+Some("789") traverse ((_: String).map(_ - 48).toList) // List(Some(7), Some(8), Some(9))
+List("abc", "def", "ghi") ->> // abcdefghi
+Array(true, false, false, true, false) ->> // true (using the disjunction monoid)              
+            </programlisting>
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+</sect1>

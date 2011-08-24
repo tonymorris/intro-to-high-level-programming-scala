@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    $LastChangedRevision: 1938 $
+    $LastChangedDate: 2010-03-10 20:50:58 +1000 (Wed, 10 Mar 2010) $
+-->
+
+<sect1 id="RealWorldSnippets">
+  <title>Real World Snippets</title>
+  <sect2 id="RealWorldSnippets.Instinct">
+    <title>Instinct BDD Framework</title>
+    <para>
+      Before<footnote>
+        <para>
+          <emphasis>Courtesy: Tom Adams, <ulink url="http://code.google.com/p/instinct/">Instinct</ulink></emphasis>
+        </para>
+      </footnote>:
+      <programlisting language="Java">
+private &lt;T&gt; Collection&lt;Method&gt; findNamedMethods(final Class&lt;T&gt; cls, final NamingConvention namingConvention) {
+  final Collection&lt;Method&gt; locatedMethods = new ArrayList&lt;Method&gt;();
+  for (final Method method : methodLocator.locate(cls)) {
+    if (method.getName().matches(namingConvention.getPattern())) {
+      locatedMethods.add(method);
+    }
+  }
+  return locatedMethods;
+}
+      </programlisting>
+    </para>
+    <para>
+      After:
+      <programlisting language="Scala">
+def findNamedMethods[T](cls: Class[T], namingConvention: NamingConvention) =
+  methodLocator locate(cls) filter (_.getName.matches(namingConvention.getPattern))
+      </programlisting>      
+    </para>
+  </sect2>
+  <sect2 id="Formalities.ReductioWebsite">
+    <title>Reductio Website</title>
+    <para>
+      Reductio <ulink url="http://reductiotest.org/examples">code examples</ulink> utilising Scala's XML literals:
+      <programlisting language="Scala">
+&lt;div&gt;
+  &lt;ul&gt;
+    {
+      examples map { case (c, name, _) =&gt;
+        &lt;li&gt;&lt;a href={ '#' + c }&gt;{ name }&lt;/a&gt;&lt;/li&gt;
+      }
+    }
+  &lt;/ul&gt;
+  &lt;hr/&gt;
+&lt;/div&gt;
+      </programlisting>       
+    </para>
+  </sect2>
+</sect1>

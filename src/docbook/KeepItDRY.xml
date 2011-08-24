@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    $LastChangedRevision: 1938 $
+    $LastChangedDate: 2010-03-10 20:50:58 +1000 (Wed, 10 Mar 2010) $
+-->
+
+<sect1 id="KeepItDRY">
+  <title>Keep it DRY</title>
+  <sect2 id="KeepItDRY.SupposeWeHad">
+    <title>Suppose we had...</title>
+      <para>
+        <programlisting language="Scala">
+Iterable&lt;String&gt; convertValueOf(Iterable&lt;Integer&gt; x) {
+  Collection&lt;String&gt; y = new LinkedList&lt;String&gt;();
+  for(Integer i : x)
+    y.add(String.valueOf(i));
+  return y;
+}
+
+...
+          
+Iterable&lt;String&gt; convertForDatabase(Iterable&lt;Integer&gt; x) {
+  Collection&lt;String&gt; y = new LinkedList&lt;String&gt;();
+  for(Integer i : x)
+    y.add(new StringBuilder(i + 7).reverse().toString());
+  return y;
+}
+        </programlisting>
+        <itemizedlist>
+          <listitem>
+            <para>
+              Duplication! Let's refactor.
+            </para>
+          </listitem>
+        </itemizedlist>
+      </para>
+  </sect2>
+  <sect2>
+    <title>So then we had...</title>
+      <para>
+        <programlisting language="Scala">
+interface Stringer {
+  String stringify(Integer i);
+}
+
+Iterable&lt;String&gt; stringifyConvert(Iterable&lt;Integer&gt; x, Stringer s) {
+  Collection&lt;String&gt; y = new LinkedList&lt;String&gt;();
+  for(Integer i : x)
+    y.add(s.stringify(i));
+  return y;
+}
+        </programlisting>
+        <itemizedlist>
+          <listitem>
+            <para>
+              Then we passed in the two differing implementations of <code>Stringer</code> for the two use cases.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              But...
+            </para>
+          </listitem>
+        </itemizedlist>
+      </para>
+  </sect2>
+  <sect2>
+    <title>But then we also had...</title>
+      <para>
+        <programlisting language="Scala">
+Iterable&lt;Integer&gt; convertParse(Iterable&lt;String&gt; x) {
+  Collection&lt;Integer&gt; y = new LinkedList&lt;Integer&gt;();
+  for(String s : x)
+    y.add(Integer.parseInt(s));
+  return y;
+}
+        </programlisting>
+        <itemizedlist>
+          <listitem>
+            <para>
+              Uh oh, more duplication &mdash; more refactoring!
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              So let's parameterise over the method types
+            </para>
+          </listitem>
+        </itemizedlist>
+      </para>
+  </sect2>
+  <sect2>
+    <title>Refactoring Wizardry</title>
+      <para>
+        <programlisting language="Scala">
+interface Mapper&lt;A, B&gt; {
+  B map(A a);
+}
+
+&lt;A, B&gt; Iterable&lt;B&gt; mapperConvert(Iterable&lt;A&gt; x, Mapper&lt;A, B&gt; m) {
+  Collection&lt;B&gt; y = new LinkedList&lt;B&gt;();
+  for(A a : x)
+    y.add(m.map(a));
+  return y;
+}
+        </programlisting>
+        <itemizedlist>
+          <listitem>
+            <para>
+              Problem resolved? <code>LinkedList</code>?
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              What if we want to map something that is not only not <code>Iterable</code>, but it makes no sense for it
+              to be <code>Iterable</code>? i.e. we couldn't even implement the interface if we wanted to.
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Should we concede and use dynamic typing &mdash; any object that supports the <code>map</code> method? Or
+              perhaps concede Java's static type system and use reflection?
+            </para>
+          </listitem>
+          <listitem>
+            <para>
+              Perhaps we want to do a bit more, such as remove elements of a certain criteria as we map?
+            </para>
+          </listitem>
+        </itemizedlist>
+      </para>
+  </sect2>
+  <sect2>
+    <title>The DRY Continuum</title>
+      <para>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="resources/images/dry_continuum.png" format="PNG"/>
+          </imageobject>
+        </mediaobject>
+      </para>
+  </sect2>
+</sect1>

@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    $LastChangedRevision: 1938 $
+    $LastChangedDate: 2010-03-10 20:50:58 +1000 (Wed, 10 Mar 2010) $
+-->
+
+<sect1 id="BriefIntroToFP">
+  <title>A Brief Introduction to Functional Programming</title>
+  <sect2 id="BriefIntroToFP.YoureDoingItWrong">
+    <title>Remember this crazy guy?</title>
+    <para>
+      If I may loosely paraphrase Erik Meijer at JAOO Brisbane 2008:
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="resources/images/Meijer.png" format="PNG"/>
+        </imageobject>
+      </mediaobject>
+    </para>
+  </sect2>
+  <sect2 id="BriefIntroToFP.Fundamentalism">
+    <title>Fundamentalism</title>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            <emphasis>Fundamentalist</emphasis><footnote>
+              <para>
+                Erik Meijer, JAOO Brisbane, 2008
+              </para>
+            </footnote> functional programming is founded on eschewing side-effects or impurities.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            A side-effect is any function which acts on unstated free variables e.g. iterators, loops, uncontrolled I/O.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Consider <code>java.lang.String</code>, which we say is immutable. Really, we are saying all of its methods
+            are <emphasis>referentially transparent</emphasis>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Referential transparency (or purity) is the anti-thesis of side-effects (or impurity).
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+  <sect2 id="BriefIntroToFP.ReferentialTransparency">
+    <title>Referential Transparency</title>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            Not to be confused with <emphasis>idempotence</emphasis>.<footnote>
+              <para>
+                See <ulink url="http://blog.tmorris.net/idempotence-versus-referential-transparency/">Idempotence versus Referential Transparency</ulink>
+              </para>
+            </footnote>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            The litmus test.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            If:
+            <programlisting language="Java">
+g(f(args));
+g(f(args));
+            </programlisting>
+            is equivalent<footnote>
+              <para>
+                has an indistinguishable program outcome.
+              </para>
+            </footnote> to:
+            <programlisting language="Java">
+final T t = f(args);
+g(t);
+g(t);
+            </programlisting>
+            for any function <code>g</code> and any arguments to <code>f</code> (which we have called <code>args</code>)
+            then we say that <code>f</code> is referentially transparent.
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+  <sect2>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            For example
+            <programlisting language="Java">
+g(s.charAt(i));
+g(s.charAt(i));
+            </programlisting>
+            is always equivalent (regardless of <code>g</code>) to:
+            <programlisting language="Java">
+final char c = s.charAt(i);
+g(c);
+g(c);
+            </programlisting>
+            Therefore, <code>charAt</code> is referentially transparent.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Bad news; <code>new</code> is a side-effect. Ever wanted to hide that constructor for your immutable type?
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            More bad news; Java makes it extremely difficult to be rid of impurity.<footnote>
+              <para>
+                <ulink url="http://functionaljava.org/">Functional Java</ulink>
+                -<emphasis>Quod Erat Demonstrandum</emphasis>
+              </para>
+            </footnote>
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+  <sect2 id="BriefIntroToFP.DunnoDontCare">
+    <title>To care or not to care</title>
+    <para>
+      <programlisting language="Java">
+        String s1 = ...
+        String s2 = ...
+        method(s1.charAt(x), s2.charAt(y));
+      </programlisting>
+      <orderedlist>
+        <listitem>
+          <para>
+            <code>s1.charAt(x)</code> executes first, then <code>s2.charAt(y)</code>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <code>s2.charAt(y)</code> executes first, then <code>s1.charAt(x)</code>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Dunno which executes first &mdash; better find out.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            I might know which executes first but I don't care.
+          </para>
+        </listitem>
+      </orderedlist>
+    </para>
+  </sect2>
+  <sect2>
+    <para>
+      <programlisting language="Java">
+        char charAt2(int index) {
+          writeFile(this, index);
+          return this.charAt(index);
+        }
+
+        method(s1.charAt2(x), s2.charAt2(y));
+      </programlisting>
+      <orderedlist>
+        <listitem>
+          <para>
+            <code>s1.charAt2(x)</code> executes first, then <code>s2.charAt2(y)</code>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <code>s2.charAt2(y)</code> executes first, then <code>s1.charAt2(x)</code>.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Dunno which executes first &mdash; better find out.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            I might know which executes first but I don't care.
+          </para>
+        </listitem>
+      </orderedlist>
+    </para>
+  </sect2>
+  <sect2 id="BriefIntroToFP.SoWhat">
+    <title>So what?</title>
+    <para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            Pure code produces composable units or "gluing smaller components to make larger components",<footnote>
+              <para>
+                <emphasis>(paraphrase)</emphasis>
+                <ulink  url="http://www.math.chalmers.se/~rjmh/Papers/whyfp.html">Why Functional Programming Matters</ulink>, John Hughes
+              </para>
+            </footnote> while impure code produces endless repetition and poor abstraction.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Pure code permits higher (much higher) levels of abstraction and is the <emphasis>essence</emphasis> of
+            eliminating repetition. Purity is DRY and more.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Pure code is significantly easier to reason about.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            We want fewer bugs, higher abstractions, lesser hindrances to approaching purity, all within a flexible type
+            system. Must we abandon the JVM or legacy Java code?
+          </para>
+        </listitem>
+      </itemizedlist>
+    </para>
+  </sect2>
+</sect1>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+    $LastChangedRevision: 1938 $
+    $LastChangedDate: 2010-03-10 20:50:58 +1000 (Wed, 10 Mar 2010) $
+-->
+
+<appendix id="LargeApplications">
+  <title id="LargeApplications.title">Yeah but how can we write medium/large applications?</title>
+  <para>
+    Many people who are new to high-level programming often ask this question. This question needs addressing (as
+    opposed to answering), since it begs another question, "what is a medium/large application?".
+  </para>
+  <para>
+    Consider this very trivial program:
+    <programlisting language="Scala">
+def f(a: Int, b: Int, c: Int) = a * b + c
+    </programlisting>
+    It takes two smaller <emphasis>units of software</emphasis> (<code>*</code> and <code>+</code>) to compose a larger
+    (but still what many would say is small) piece of software. We can do this because <code>*</code> and <code>+</code> 
+    are <emphasis>pure functions</emphasis>. They have no unwanted side-effects.
+  </para>
+  <para>
+    Some programming environments actively promote side-effects. This can sometimes be so overwhelming that the
+    possibility of an alternative is never considered. It becomes the norm to accept the far-reaching implications of
+    performing side-effects wildly and without care, as unavoidable. The beginner is so used to a mindset that shuns
+    compositional software that any alternative looks vague and fuzzy. If either of <code>*</code> or <code>+</code>
+    perform a side-effect, we must rewrite, absent the side-effect.
+  </para>
+  <para>
+    Even when considering the I/O aspects of a typical application, the impurities are relatively minor and
+    inconsequential. However, since the composition of an impurity with a purity results in an impurity, it is often
+    tempting to yield to the programming environment and produce a <emphasis>large application</emphasis> &mdash; which
+    is a euphemism for an <emphasis>unmanageable application</emphasis>. In other words, the answer to the question
+    "what is a medium/large application?" is simply this:
+    <blockquote>
+      <para>
+        Any application that is so difficult to manage as a result of the proliferation of side-effects, that it often
+        requires a committee of authoritarianism to approve a change that is almost certainly going to cause devastating
+        consequences. These consequences are dealt with by clever marketing and squelching any protests by software
+        developers.
+      </para>
+    </blockquote>
+  </para>
+  <para>
+    Once the detrimental mindset of marriage to side-effects is abandoned, I am quite sure that many examples of such
+    applications can be found in the sphere of the web and various other places. However, this very act can be
+    psychologically traumatic as certain propositions that were once held deep and dear as true, tumble into the pits of
+    undefinedness resulting in the sudden onset of mass insecurity. This is a very real trauma and counselling is often
+    beneficial. No, really, it is.
+  </para>
+  <para>
+    If you have a mandatory pure environment (like Haskell) or a just-don't-be-silly-please environment (like Scala),
+    where compositional aspects of software are embraced to at least some degree, the distinction between a trivial and
+    non-trivial application disappears (to that degree).
+  </para>
+  <para>
+    How can we write large applications? Just keep composing the smaller units to make the larger unit &mdash; that's
+    how (yes really). You don't have <code>ABC</code>, but you do have <code>B</code> and <code>C</code>? Well that's
+    easy, write <code>A</code>, then <code>ABC</code>. Yeah but <emphasis>really</emphasis> large. You mean like
+    <code>ABCDEF</code>? Well if you have <code>ABC</code>, then write <code>D</code>, <code>E</code> and
+    <code>F</code> and you're nearly done. <emphasis role="bold">...ad infinitum</emphasis>.    
+  </para>
+  <para>
+    The reader is strongly urged to consider essays, papers and presentations by John Hughes, Erik Meijer,
+    Simon Peyton-Jones, Philip Wadler and many other figures who make efforts to portray this understanding.
+  </para>
+</appendix>
