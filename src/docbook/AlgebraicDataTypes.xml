@@ -136,7 +136,7 @@ def stringOne[X](o: OneOrNone[X]) = o match {
                 See Church Numeral Encoding &mdash; Alonzo Church
               </para>
             </footnote>.
-            <programlisting language="Scala">
+            <programlisting>
 sealed trait Natural
 final case object Zero extends Natural
 final case class Succ(s: Natural) extends Natural
@@ -146,7 +146,7 @@ final case class Succ(s: Natural) extends Natural
         <listitem>
           <para>
             We can now write a function to add two natural numbers.
-            <programlisting language="Scala">
+            <programlisting>
 def add(x: Natural, y: Natural): Natural = x match {
   case Zero => y
   case Succ(t) => add(t, Succ(y))
@@ -178,7 +178,7 @@ k: Natural = Succ(Succ(Succ(Zero)))
         <listitem>
           <para>
             Lists are extremely common in high-level programming.
-            <programlisting language="Scala">
+            <programlisting>
 sealed trait List[+A]
 final case object Nil extends List[Nothing]
 final case class Cons[A](h: A, t: List[A]) extends List[A]
@@ -212,7 +212,7 @@ final case class Cons[A](h: A, t: List[A]) extends List[A]
           <para>
             The <code>Option</code> structure is a list that contains 0 or 1 element (
             <emphasis>sound familiar?</emphasis>) &mdash; and is not recursive like <code>List</code>.
-            <programlisting language="Scala">
+            <programlisting>
 sealed trait Option[+A]
 final case object None extends Option[Nothing]
 final case class Some[+A](a: A) extends Option[A]
@@ -242,7 +242,7 @@ else {
   else return method3(y, args3);
             </programlisting>
             Ick!
-            <programlisting language="Scala">
+            <programlisting>
 method1(args1) flatMap (method2(_, args2)) flatMap (method3(_, args3))
             </programlisting>
           </para>

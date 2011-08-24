@@ -94,7 +94,7 @@ byte[] encoded = e.encode(contents); // has UTF-8 applied.
       <listitem>
         <para>
           In Scala, we can partially apply arguments to return new functions.
-          <programlisting language="Scala">
+          <programlisting>
 scala> def add(x: Int)(y: Int) = x + y
 add: (Int)(Int)Int
 
@@ -109,7 +109,7 @@ h: Int = 15
       <listitem>
         <para>
           We can get very funky indeed.
-          <programlisting language="Scala">
+          <programlisting>
 scala> val i = List(1, 2, 3) map foo
 i: List[Int] = List(8, 9, 10)
           </programlisting>
@@ -118,7 +118,7 @@ i: List[Int] = List(8, 9, 10)
       <listitem>
         <para>
           Our encoder.
-          <programlisting language="Scala">
+          <programlisting>
 scala> def encoder: String => String => Array[Byte] = null // todo
 encoder: (String) => (String) => Array[Byte]
             

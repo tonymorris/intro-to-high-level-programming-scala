@@ -37,7 +37,7 @@
           <listitem>
             <para>
               Example <emphasis>(welcome to the Scala interpreter)</emphasis>
-              <programlisting language="Scala">
+              <programlisting>
 scala> val a = 7
 a: Int = 7
 
@@ -71,7 +71,7 @@ e: Int = 10
           <listitem>
             <para>
               Example
-              <programlisting language="Scala">
+              <programlisting>
 scala> val t = if(true) 7 else 8
 t: Int = 7
 
@@ -126,7 +126,7 @@ interface DatabaseWalloper {
         </listitem>
         <listitem>
           <para>
-            <programlisting language="Scala">
+            <programlisting>
 scala> def reverseParse(s: String, f: String => Int) = f(s.reverse)
 reverseParse: (String,(String) => Int)Int
 
@@ -138,7 +138,7 @@ c: Int = 2365
         <listitem>
           <para>
             Since functions are first-class we can do other clever things with them, like compose them.
-            <programlisting language="Scala">
+            <programlisting>
 scala> def compose[A, B, C](f: B => C, g: A => B): A => C = (a: A) => f(g(a))
 compose: [A,B,C]((B) => C,(A) => B)(A) => C
             </programlisting>
@@ -155,7 +155,7 @@ compose: [A,B,C]((B) => C,(A) => B)(A) => C
             <para>
               <code>trait</code> is like a Java <code>interface</code> but allows
               <emphasis>mixin composition</emphasis>.
-              <programlisting language="Scala">
+              <programlisting>
 scala> trait Foo { def bar(n: Int): String }
 defined trait Foo
 
@@ -171,7 +171,7 @@ defined trait Baz
             <para>
               <code>class</code> is similar to a Java <code>class</code>, however <code>case class</code> has no Java
               equivalent.
-              <programlisting language="Scala">
+              <programlisting>
 scala> case class Person(name: String, age: Int)
 defined class Person
 
@@ -241,7 +241,7 @@ void m2(java.util.List&lt;String&gt; s) { m1(s); } // bzzt!
                   And <code>-</code> to denote contravariance; another matter.
                 </para>
               </footnote>
-              <programlisting language="Scala">
+              <programlisting>
 scala> trait List[+A] { val head: A; val tail: List[A] }
 
 scala> val x = new List[String] { val head = "abc"; val tail = null }

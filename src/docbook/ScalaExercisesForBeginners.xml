@@ -8,7 +8,7 @@
 <appendix id="ScalaExercisesForBeginners">
   <title id="ScalaExercisesForBeginners.title">Scala Exercises For Beginners</title>
   <para>
-    <programlisting language="Scala">
+    <programlisting>
 sealed trait List[+A] {
   override def toString = {
     def toScalaList(t: List[A]): scala.List[A] = t match {

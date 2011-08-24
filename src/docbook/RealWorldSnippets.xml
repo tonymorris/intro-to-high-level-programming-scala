@@ -29,7 +29,7 @@ private &lt;T&gt; Collection&lt;Method&gt; findNamedMethods(final Class&lt;T&gt;
     </para>
     <para>
       After:
-      <programlisting language="Scala">
+      <programlisting>
 def findNamedMethods[T](cls: Class[T], namingConvention: NamingConvention) =
   methodLocator locate(cls) filter (_.getName.matches(namingConvention.getPattern))
       </programlisting>      
@@ -39,7 +39,7 @@ def findNamedMethods[T](cls: Class[T], namingConvention: NamingConvention) =
     <title>Reductio Website</title>
     <para>
       Reductio <ulink url="http://reductiotest.org/examples">code examples</ulink> utilising Scala's XML literals:
-      <programlisting language="Scala">
+      <programlisting>
 &lt;div&gt;
   &lt;ul&gt;
     {

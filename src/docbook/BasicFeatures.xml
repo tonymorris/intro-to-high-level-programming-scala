@@ -36,7 +36,7 @@
                 <imagedata fileref="resources/images/IAmAlwaysRight.jpg" format="JPG"/>
               </imageobject>
             </mediaobject>
-            <programlisting language="Scala">
+            <programlisting>
 scala> val t = 7
 t: Int = 7
 
@@ -72,7 +72,7 @@ scala> t.length
           <listitem>
             <para>
               The Scala library includes some higher-order functions
-              <programlisting language="Scala">
+              <programlisting>
   people.filter(_.age > 20)
 
   people.sort((p1, p2) => p1.name &lt; p2.name)

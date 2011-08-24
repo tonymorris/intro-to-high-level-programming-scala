@@ -13,7 +13,7 @@
   </para>
   <para>
     Consider this very trivial program:
-    <programlisting language="Scala">
+    <programlisting>
 def f(a: Int, b: Int, c: Int) = a * b + c
     </programlisting>
     It takes two smaller <emphasis>units of software</emphasis> (<code>*</code> and <code>+</code>) to compose a larger

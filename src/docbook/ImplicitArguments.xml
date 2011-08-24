@@ -42,7 +42,7 @@
               Also see C# 3.0 Extension Methods
             </para>
           </footnote>
-          <programlisting language="Scala">
+          <programlisting>
 scala> implicit def i(s: String) = new { def parseInt = Integer.parseInt(s) }
 i: (String)java.lang.Object{def parseInt: Int}
 

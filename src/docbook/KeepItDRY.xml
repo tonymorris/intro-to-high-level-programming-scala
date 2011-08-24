@@ -10,7 +10,7 @@
   <sect2 id="KeepItDRY.SupposeWeHad">
     <title>Suppose we had...</title>
       <para>
-        <programlisting language="Scala">
+        <programlisting>
 Iterable&lt;String&gt; convertValueOf(Iterable&lt;Integer&gt; x) {
   Collection&lt;String&gt; y = new LinkedList&lt;String&gt;();
   for(Integer i : x)
@@ -39,7 +39,7 @@ Iterable&lt;String&gt; convertForDatabase(Iterable&lt;Integer&gt; x) {
   <sect2>
     <title>So then we had...</title>
       <para>
-        <programlisting language="Scala">
+        <programlisting>
 interface Stringer {
   String stringify(Integer i);
 }
@@ -68,7 +68,7 @@ Iterable&lt;String&gt; stringifyConvert(Iterable&lt;Integer&gt; x, Stringer s) {
   <sect2>
     <title>But then we also had...</title>
       <para>
-        <programlisting language="Scala">
+        <programlisting>
 Iterable&lt;Integer&gt; convertParse(Iterable&lt;String&gt; x) {
   Collection&lt;Integer&gt; y = new LinkedList&lt;Integer&gt;();
   for(String s : x)
@@ -93,7 +93,7 @@ Iterable&lt;Integer&gt; convertParse(Iterable&lt;String&gt; x) {
   <sect2>
     <title>Refactoring Wizardry</title>
       <para>
-        <programlisting language="Scala">
+        <programlisting>
 interface Mapper&lt;A, B&gt; {
   B map(A a);
 }
