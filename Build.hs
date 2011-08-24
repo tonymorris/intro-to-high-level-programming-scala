@@ -5,5 +5,5 @@ import Build.Document
 c :: 
   Config
 c = 
-  defaultConfig "docbook-document" "Docbook Document"
+  defaultConfig "intro-to-high-level-programming-scala" "Introduction to High-level Programming with Scala"
 

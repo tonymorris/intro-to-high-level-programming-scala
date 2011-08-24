@@ -1,7 +1,7 @@
-Docbook Document
-================
+Introduction to High-level Programming with Scala
+=================================================
 
-A template from which to create a Docbook document.
+Slides for a presentation on programming with Scala.
 
 Setting up
 ==========
