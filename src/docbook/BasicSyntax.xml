@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
+<!DOCTYPE sect1 PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+    "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+  <!ENTITY mdash          "&#x2014;">
+]>
+
 <sect1 id="BasicSyntax">
   <title>Basic Syntax of Scala</title>
-  <sect2 id="BasicSyntax.val,var,def,lazy_val">
+  <sect2 id="BasicSyntax.val.var.def.lazy_val">
     <title>val,var,def,lazy val</title>
       <para>
         <itemizedlist>
@@ -109,6 +114,7 @@ interface DatabaseWalloper {
       </para>
   </sect2>
   <sect2>
+    <title>Function literal</title>
     <para>
       <itemizedlist>
         <listitem>

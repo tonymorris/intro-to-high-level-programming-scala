@@ -2,24 +2,9 @@
 
 <!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
     "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
-    <!ENTITY articleinfo SYSTEM "articleinfo.xml">
-    <!ENTITY Introduction SYSTEM "Introduction.xml">
-    <!ENTITY Formalities SYSTEM "Formalities.xml">
-    <!ENTITY KeepItDRY SYSTEM "KeepItDRY.xml">
-    <!ENTITY BriefIntroToFP SYSTEM "BriefIntroToFP.xml">
-    <!ENTITY WhereDoesScalaFit SYSTEM "WhereDoesScalaFit.xml">
-    <!ENTITY BasicSyntax SYSTEM "BasicSyntax.xml">
-    <!ENTITY BasicFeatures SYSTEM "BasicFeatures.xml">
-    <!ENTITY AlgebraicDataTypes SYSTEM "AlgebraicDataTypes.xml">
-    <!ENTITY PartialApplication SYSTEM "PartialApplication.xml">
-    <!ENTITY ImplicitArguments SYSTEM "ImplicitArguments.xml">
-    <!ENTITY RealWorldSnippets SYSTEM "RealWorldSnippets.xml">
-    <!ENTITY Workingmouse SYSTEM "Workingmouse.xml">
-    <!ENTITY IfWeHaveTime SYSTEM "IfWeHaveTime.xml">
-    <!ENTITY Thanks SYSTEM "Thanks.xml">
-    <!ENTITY LargeApplications SYSTEM "LargeApplications.xml">
-    <!ENTITY ScalaExercisesForBeginners SYSTEM "ScalaExercisesForBeginners.xml">
-  ]>
+    <!ENTITY % local.common.attrib
+               "xmlns:xi  CDATA  #FIXED 'http://www.w3.org/2001/XInclude'">
+]>
 
 <!--
 * Introduce time at IBM on the IBM JDK (java.security) and IBM WAS 6, Functional Java and Reductio
@@ -32,22 +17,22 @@
 * I am not here to bore you with slide after slide; you must engage your thinking faculties and ask me questions should they arise        
 * functionaljava.org and reductiotest.org are written in Scala
 -->
-<article>
-  &articleinfo;
-  &Introduction;
-  &Formalities;
-  &KeepItDRY;
-  &BriefIntroToFP;
-  &WhereDoesScalaFit;
-  &BasicSyntax;
-  &BasicFeatures;
-  &AlgebraicDataTypes;
-  &PartialApplication;
-  &ImplicitArguments;
-  &RealWorldSnippets;
-  &Workingmouse;
-  &IfWeHaveTime;
-  &Thanks;
-  &LargeApplications;
-  &ScalaExercisesForBeginners;
+<article xmlns:xi="http://www.w3.org/2001/XInclude">
+  <xi:include href="articleinfo.xml"/>
+  <xi:include href="Introduction.xml"/>
+  <xi:include href="Formalities.xml"/>
+  <xi:include href="KeepItDRY.xml"/>
+  <xi:include href="BriefIntroToFP.xml"/>
+  <xi:include href="WhereDoesScalaFit.xml"/>
+  <xi:include href="BasicSyntax.xml"/>
+  <xi:include href="BasicFeatures.xml"/>
+  <xi:include href="AlgebraicDataTypes.xml"/>
+  <xi:include href="PartialApplication.xml"/>
+  <xi:include href="ImplicitArguments.xml"/>
+  <xi:include href="RealWorldSnippets.xml"/>
+  <xi:include href="Workingmouse.xml"/>
+  <xi:include href="IfWeHaveTime.xml"/>
+  <xi:include href="Thanks.xml"/>
+  <xi:include href="LargeApplications.xml"/>
+  <xi:include href="ScalaExercisesForBeginners.xml"/>
 </article>

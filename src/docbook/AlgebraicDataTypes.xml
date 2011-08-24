@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
+<!DOCTYPE sect1 PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+    "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+  <!ENTITY mdash          "&#x2014;">
+]>
+
 <sect1 id="AlgebraicDataTypes">
   <title>Algebraic Data Types</title>
   <sect2 id="AlgebraicDataTypes.TheExpressionProblem">
@@ -28,6 +33,7 @@
     </para>
   </sect2>
   <sect2>
+    <title>One or None</title>
     <para>
       <itemizedlist>
         <listitem>
@@ -59,6 +65,7 @@ interface OneOrNoneVisitor&lt;A&gt; {
     </para>
   </sect2>
   <sect2>
+    <title>Visitor</title>
     <para>
       <itemizedlist>
         <listitem>
@@ -86,6 +93,7 @@ class You {
     </para>
   </sect2>
   <sect2>
+    <title>ADTs Instead</title>
     <para>
       <itemizedlist>
         <listitem>
@@ -261,6 +269,7 @@ method1(args1) flatMap (method2(_, args2)) flatMap (method3(_, args3))
     </para>
   </sect2>
   <sect2>
+    <title>Either</title>
     <para>
       <itemizedlist>
         <listitem>

@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
+<!DOCTYPE sect1 PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+    "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+  <!ENTITY mdash          "&#x2014;">
+]>
+
 <sect1 id="IfWeHaveTime">
   <title>If we have time but we probably won't</title>
   <sect2 id="IfWeHaveTime.Questions">
@@ -216,6 +221,7 @@ List(2, 6, 8, 9, 6, 7, 3, 5, 8, 6, 9) selectSplit even // List(List(2, 6, 8), Li
     </para>
   </sect2>
   <sect2>
+    <title>Functors and Monads</title>
     <para>
       <itemizedlist>
         <listitem>

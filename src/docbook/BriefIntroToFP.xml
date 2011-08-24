@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 
+<!DOCTYPE sect1 PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+    "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd" [
+  <!ENTITY mdash          "&#x2014;">
+]>
+
 <sect1 id="BriefIntroToFP">
   <title>A Brief Introduction to Functional Programming</title>
   <sect2 id="BriefIntroToFP.YoureDoingItWrong">
@@ -88,6 +93,7 @@ g(t);
     </para>
   </sect2>
   <sect2>
+    <title>For example</title>
     <para>
       <itemizedlist>
         <listitem>
@@ -157,6 +163,7 @@ g(c);
     </para>
   </sect2>
   <sect2>
+    <title>Which First?</title>
     <para>
       <programlisting language="Java">
         char charAt2(int index) {
